@@ -3,12 +3,15 @@
 #ifndef CITIZEN_H
 #define CITIZEN_H
 
+#include <memory>
+
 #include "helper.h"
 
 class Citizen : public virtual Character {
 public:
     virtual Citizen(HealthPoints health, Age age);
     const Age getAge();
+
 private:
     const Age _age;
 };
@@ -32,6 +35,8 @@ public:
     Sheriff(HealthPoints health, Age age, AttackPower attackPower);
 };
 
-std::shared_ptr<Sheriff> createSheriff(HealthPoints health, Age age, AttackPower attackPower);
+std::shared_ptr<Sheriff> createSheriff(HealthPoints health,
+                                       Age age,
+                                       AttackPower attackPower);
 
 #endif  // CITIZEN_H

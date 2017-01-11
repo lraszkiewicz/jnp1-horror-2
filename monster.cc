@@ -8,21 +8,24 @@ virtual Monster::Monster(HealthPoints health, AttackPower attackPower) :
 Zombie::Zombie(HealthPoints health, AttackPower attackPower) :
         Monster(health, attackPower) {};
 
-std::shared_ptr<Zombie> createZombie(HealthPoints health, AttackPower attackPower) {
+std::shared_ptr<Zombie> createZombie(HealthPoints health,
+                                     AttackPower attackPower) {
     return std::make_shared<Zombie>(Zombie(health, attackPower));
 }
 
 Vampire::Vampire(HealthPoints health, AttackPower attackPower) :
         Monster(health, attackPower) {};
 
-std::shared_ptr<Vampire> createVampire(HealthPoints health, AttackPower attackPower) {
+std::shared_ptr<Vampire> createVampire(HealthPoints health,
+                                       AttackPower attackPower) {
     return std::make_shared<Vampire>(Vampire(health, attackPower));
 }
 
 Mummy::Mummy(HealthPoints health, AttackPower attackPower) :
         Monster(health, attackPower) {};
 
-std::shared_ptr<Mummy> createMummy(HealthPoints health, AttackPower attackPower) {
+std::shared_ptr<Mummy> createMummy(HealthPoints health,
+                                   AttackPower attackPower) {
     return std::make_shared<Mummy>(Mummy(health, attackPower));
 }
 
@@ -45,25 +48,32 @@ AttackPower APSum(std::vector<std::shared_ptr<Monster>> &monsters) {
     return result;
 }
 
-GroupOfMonsters::GroupOfMonsters(std::vector<std::shared_ptr<Monster>> monsters) :
+GroupOfMonsters::GroupOfMonsters(
+    std::vector<std::shared_ptr<Monster>> monsters) :
         Monster(HPSum(monsters), APSum(monsters)), _monsters(monsters) {};
 
-GroupOfMonsters::GroupOfMonsters(std::initializer_list<std::shared_ptr<Monster>> monsters) :
+GroupOfMonsters::GroupOfMonsters(
+    std::initializer_list<std::shared_ptr<Monster>> monsters) :
         Monster(HPSum(monsters), APSum(monsters)), _monsters(monsters) {};
 
-HealthPoints GroupOfMonsters::getHealth() { return HPSum(_monsters); }
+HealthPoints GroupOfMonsters::getHealth() {
+    return HPSum(_monsters);
+}
 
-AttackPower GroupOfMonsters::getAttackPower() { return APSum(_monsters); }
+AttackPower GroupOfMonsters::getAttackPower() {
+    return APSum(_monsters);
+}
 
 void GroupOfMonsters::takeDamage(AttackPower damage) {
-    for (auto &monster : _monsters) {
-        (*monster).takeDamage(damage);
-        if ((*monster).getHealth() == 0) {
+    for (auto & monster : _monsters) {
+        monster->takeDamage(damage);
+        if (monster->getHealth() == 0) {
             //TODO potencjalnie usuwanie potworów z listy
         }
     }
 }
 
-std::shared_ptr<GroupOfMonsters> createGroupOfMonsters(std::vector<std::shared_ptr<Monster>> monsters) {
+std::shared_ptr<GroupOfMonsters> createGroupOfMonsters(
+        std::vector<std::shared_ptr<Monster>> monsters) {
     return std::make_shared<GroupOfMonsters>(monsters);
 }

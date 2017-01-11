@@ -1,17 +1,19 @@
 // Łukasz Raszkiewicz, Maciej Gontar
 
-#include <cassert>
+#include <stdexcept>
 
 #include "citizen.h"
 
 virtual Citizen::Citizen(HealthPoints health, Age age) :
         Character(health), _age(age) {};
 
-const Age Citizen::getAge() { return _age; }
+const Age Citizen::getAge() {
+    return _age;
+}
 
 Adult::Adult(HealthPoints health, Age age) : Citizen(health, age) {
-    assert(age >= 18);
-    assert(age <= 100);
+    if (age < 18 || age > 100)
+        throw std::invalid_argument("Adult's age must be in [18;100].");
 }
 
 std::shared_ptr<Adult> createAdult(HealthPoints health, Age age) {
@@ -19,8 +21,8 @@ std::shared_ptr<Adult> createAdult(HealthPoints health, Age age) {
 }
 
 Teenager::Teenager(HealthPoints health, Age age) : Citizen(health, age) {
-    assert(age >= 11);
-    assert(age <= 17);
+    if (age < 11 || age > 17)
+        throw std::invalid_argument("Teenager's age must be in [11;17].");
 }
 
 std::shared_ptr<Teenager> createTeenager(HealthPoints health, Age age) {

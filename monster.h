@@ -3,6 +3,7 @@
 #ifndef MONSTER_H
 #define MONSTER_H
 
+#include <memory>
 #include <vector>
 
 #include "helper.h"
@@ -17,21 +18,24 @@ public:
     Zombie(HealthPoints health, AttackPower attackPower);
 };
 
-std::shared_ptr<Zombie> createZombie(HealthPoints health, AttackPower attackPower);
+std::shared_ptr<Zombie> createZombie(HealthPoints health,
+                                     AttackPower attackPower);
 
 class Vampire : public Monster {
 public:
     Vampire(HealthPoints health, AttackPower attackPower);
 };
 
-std::shared_ptr<Vampire> createVampire(HealthPoints health, AttackPower attackPower);
+std::shared_ptr<Vampire> createVampire(HealthPoints health,
+                                       AttackPower attackPower);
 
 class Mummy : public Monster {
 public:
     Mummy(HealthPoints health, AttackPower attackPower);
 };
 
-std::shared_ptr<Mummy> createMummy(HealthPoints health, AttackPower attackPower);
+std::shared_ptr<Mummy> createMummy(HealthPoints health,
+                                   AttackPower attackPower);
 
 HealthPoints HPSum(std::vector<std::shared_ptr<Monster>> &monsters);
 
@@ -47,6 +51,7 @@ public:
     HealthPoints getHealth();
     AttackPower getAttackPower();
     void takeDamage(AttackPower damage);
+
 private:
     std::vector<std::shared_ptr<Monster>> _monsters;
 };
