@@ -3,6 +3,8 @@
 #ifndef HELPER_H
 #define HELPER_H
 
+#include <memory>
+
 typedef int HealthPoints;
 typedef int Age;
 typedef int AttackPower;
