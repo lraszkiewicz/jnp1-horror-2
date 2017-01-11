@@ -12,7 +12,7 @@ class Character {
 public:
     virtual Character(HealthPoints health);
     HealthPoints getHealth();
-    virtual void takeDamage(AttackPower damage);
+    void takeDamage(AttackPower damage);
 private:
     HealthPoints _health;
 };
@@ -21,8 +21,8 @@ private:
 class Attacker {
 public:
     virtual Attacker(AttackPower attackPower);
-    AttackPower getAttackPower();
+    const AttackPower getAttackPower();
 private:
-    AttackPower _attackPower;
+    const AttackPower _attackPower;
 };
 #endif  // HELPER_H

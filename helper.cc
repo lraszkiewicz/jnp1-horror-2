@@ -19,3 +19,5 @@ virtual Attacker::Attacker(AttackPower attackPower) : _attackPower(attackPower) 
     assert(attackPower > 0);
 }
 
+const AttackPower Attacker::getAttackPower() { return _attackPower; }
+

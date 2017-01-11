@@ -4,7 +4,10 @@
 
 #include "citizen.h"
 
-Age Citizen::getAge() const { return _age; }
+virtual Citizen::Citizen(HealthPoints health, Age age) :
+        Character(health), _age(age) {};
+
+const Age Citizen::getAge() { return _age; }
 
 Adult::Adult(HealthPoints health, Age age) : Citizen(health, age) {
     assert(age >= 18);
