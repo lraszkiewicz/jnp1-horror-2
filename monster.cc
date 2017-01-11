@@ -2,7 +2,7 @@
 
 #include "monster.h"
 
-virtual Monster::Monster(HealthPoints health, AttackPower attackPower) :
+Monster::Monster(HealthPoints health, AttackPower attackPower) :
         Character(health), Attacker(attackPower) {};
 
 Zombie::Zombie(HealthPoints health, AttackPower attackPower) :
@@ -50,11 +50,11 @@ AttackPower APSum(std::vector<std::shared_ptr<Monster>> &monsters) {
 
 GroupOfMonsters::GroupOfMonsters(
     std::vector<std::shared_ptr<Monster>> monsters) :
-        Monster(HPSum(monsters), APSum(monsters)), _monsters(monsters) {};
+        Monster(-1, -1), _monsters(monsters) {};
 
 GroupOfMonsters::GroupOfMonsters(
     std::initializer_list<std::shared_ptr<Monster>> monsters) :
-        Monster(HPSum(monsters), APSum(monsters)), _monsters(monsters) {};
+        Monster(-1, -1), _monsters(monsters) {};
 
 HealthPoints GroupOfMonsters::getHealth() {
     return HPSum(_monsters);
@@ -75,5 +75,10 @@ void GroupOfMonsters::takeDamage(AttackPower damage) {
 
 std::shared_ptr<GroupOfMonsters> createGroupOfMonsters(
         std::vector<std::shared_ptr<Monster>> monsters) {
+    return std::make_shared<GroupOfMonsters>(monsters);
+}
+
+std::shared_ptr<GroupOfMonsters> createGroupOfMonsters(
+        std::initializer_list<std::shared_ptr<Monster>> monsters) {
     return std::make_shared<GroupOfMonsters>(monsters);
 }

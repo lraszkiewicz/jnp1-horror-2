@@ -7,10 +7,12 @@
 
 #include "helper.h"
 
-class Citizen : public virtual Character {
+class Citizen : public /* virtual */ Character {
 public:
-    virtual Citizen(HealthPoints health, Age age);
     const Age getAge();
+
+protected:
+    Citizen(HealthPoints health, Age age);
 
 private:
     const Age _age;

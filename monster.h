@@ -8,9 +8,9 @@
 
 #include "helper.h"
 
-class Monster : public virtual Character, public virtual Attacker {
-public:
-    virtual Monster(HealthPoints health, AttackPower attackPower);
+class Monster : public /* virtual */ Character, public /* virtual */ Attacker {
+protected:
+    Monster(HealthPoints health, AttackPower attackPower);
 };
 
 class Zombie : public Monster {
@@ -55,5 +55,11 @@ public:
 private:
     std::vector<std::shared_ptr<Monster>> _monsters;
 };
+
+std::shared_ptr<GroupOfMonsters> createGroupOfMonsters(
+        std::vector<std::shared_ptr<Monster>> monsters);
+
+std::shared_ptr<GroupOfMonsters> createGroupOfMonsters(
+        std::initializer_list<std::shared_ptr<Monster>> monsters);
 
 #endif  // MONSTER_H

@@ -4,12 +4,12 @@
 
 #include "helper.h"
 
-virtual Character::Character(HealthPoints health) : _health(health) {
+Character::Character(HealthPoints health) : _health(health) {
     if (health <= 0)
-        throw std::invalid_argument("Health must be greater than 0.")
+        throw std::invalid_argument("Health must be greater than 0.");
 }
 
-HealthPoints Character::getHealth() {
+HealthPoints Character::getHealth() const {
     return _health;
 }
 
@@ -17,12 +17,12 @@ void Character::takeDamage(AttackPower damage) {
     _health = std::max(_health - damage, 0);
 }
 
-virtual Attacker::Attacker(AttackPower attackPower) :
+Attacker::Attacker(AttackPower attackPower) :
         _attackPower(attackPower) {
     if (attackPower <= 0)
         throw std::invalid_argument("AttackPower must be greater than 0.");
 }
 
-const AttackPower Attacker::getAttackPower() {
+AttackPower Attacker::getAttackPower() const {
     return _attackPower;
 }

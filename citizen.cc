@@ -4,7 +4,7 @@
 
 #include "citizen.h"
 
-virtual Citizen::Citizen(HealthPoints health, Age age) :
+Citizen::Citizen(HealthPoints health, Age age) :
         Character(health), _age(age) {};
 
 const Age Citizen::getAge() {
