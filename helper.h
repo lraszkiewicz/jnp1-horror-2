@@ -10,7 +10,7 @@ typedef int AttackPower;
 // Anything that has health is defined as Character.
 class Character {
 public:
-    virtual Character(HealthPoints health) : _health(health) {};
+    virtual Character(HealthPoints health);
     HealthPoints getHealth();
     virtual void takeDamage(AttackPower damage);
 private:
@@ -20,7 +20,7 @@ private:
 // Anything that can do damage is defined as Attacker.
 class Attacker {
 public:
-    virtual Attacker(AttackPower attackPower) : _attackPower(attackPower) {};
+    virtual Attacker(AttackPower attackPower);
     AttackPower getAttackPower();
 private:
     AttackPower _attackPower;
