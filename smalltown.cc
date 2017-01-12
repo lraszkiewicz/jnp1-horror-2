@@ -1,6 +1,7 @@
 // Łukasz Raszkiewicz, Maciej Gontar
 
 #include <iostream>
+
 #include "smalltown.h"
 
 

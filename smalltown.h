@@ -14,7 +14,7 @@
 
 class AttackStrategy {
 public:
-    // Returns true is the monster should attack at Time time.
+    // Returns true if the monster should attack at Time time.
     virtual bool attackTime(const Time &time) const = 0;
 };
 
