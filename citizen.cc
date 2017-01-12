@@ -4,12 +4,13 @@
 
 #include "citizen.h"
 
-Citizen::Citizen(HealthPoints health, Age age) :
-        Character(health), _age(age) {};
-
-const Age Citizen::getAge() {
+Age Citizen::getAge() const {
     return _age;
 }
+
+Citizen::Citizen(HealthPoints health, Age age) :
+        Character(health), _age(age) {}
+
 
 Adult::Adult(HealthPoints health, Age age) : Citizen(health, age) {
     if (age < 18 || age > 100)
@@ -30,8 +31,10 @@ std::shared_ptr<Teenager> createTeenager(HealthPoints health, Age age) {
 }
 
 Sheriff::Sheriff(HealthPoints health, Age age, AttackPower attackPower) :
-        Adult(health, age), Attacker(attackPower) {};
+        Adult(health, age), Attacker(attackPower) {}
 
-std::shared_ptr<Sheriff> createSheriff(HealthPoints health, Age age, AttackPower attackPower) {
+std::shared_ptr<Sheriff> createSheriff(HealthPoints health,
+                                       Age age,
+                                       AttackPower attackPower) {
     return std::make_shared<Sheriff>(Sheriff(health, age, attackPower));
 }

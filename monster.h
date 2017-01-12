@@ -1,7 +1,7 @@
 // Łukasz Raszkiewicz, Maciej Gontar
 
-#ifndef MONSTER_H
-#define MONSTER_H
+#ifndef MONSTER_H_
+#define MONSTER_H_
 
 #include <memory>
 #include <vector>
@@ -37,19 +37,20 @@ public:
 std::shared_ptr<Mummy> createMummy(HealthPoints health,
                                    AttackPower attackPower);
 
-HealthPoints HPSum(std::vector<std::shared_ptr<Monster>> &monsters);
+HealthPoints HPSum(const std::vector<std::shared_ptr<Monster>> &monsters);
 
-AttackPower APSum(std::vector<std::shared_ptr<Monster>> &monsters);
+AttackPower APSum(const std::vector<std::shared_ptr<Monster>> &monsters);
 
-/// Obecnie GroupOfMonsters posiada HP i AP, ale nie mają one żadnego znaczenia
-/// Aktualizacja stanu życia odbywa się indywidualnie na poziomie _monsters
-/// Sądzę, że aktualizowanie tych wartości również na poziomie grupy jest zbędne
+// Obecnie GroupOfMonsters posiada HP i AP, ale nie mają one żadnego znaczenia
+// Aktualizacja stanu życia odbywa się indywidualnie na poziomie _monsters
+// Sądzę, że aktualizowanie tych wartości również na poziomie grupy jest zbędne
 class GroupOfMonsters : public Monster {
 public:
-    GroupOfMonsters(std::vector<std::shared_ptr<Monster>> monsters);
-    GroupOfMonsters(std::initializer_list<std::shared_ptr<Monster>> monsters);
-    HealthPoints getHealth();
-    AttackPower getAttackPower();
+    explicit GroupOfMonsters(std::vector<std::shared_ptr<Monster>> monsters);
+    explicit GroupOfMonsters(
+            std::initializer_list<std::shared_ptr<Monster>> monsters);
+    HealthPoints getHealth() const;
+    AttackPower getAttackPower() const;
     void takeDamage(AttackPower damage);
 
 private:
@@ -62,4 +63,4 @@ std::shared_ptr<GroupOfMonsters> createGroupOfMonsters(
 std::shared_ptr<GroupOfMonsters> createGroupOfMonsters(
         std::initializer_list<std::shared_ptr<Monster>> monsters);
 
-#endif  // MONSTER_H
+#endif  // MONSTER_H_

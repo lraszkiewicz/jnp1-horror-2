@@ -1,7 +1,7 @@
 // Łukasz Raszkiewicz, Maciej Gontar
 
-#ifndef HELPER_H
-#define HELPER_H
+#ifndef HELPER_H_
+#define HELPER_H_
 
 #include <stdexcept>
 
@@ -16,7 +16,7 @@ public:
     virtual void takeDamage(AttackPower damage);
 
 protected:
-    Character(HealthPoints health);
+    explicit Character(HealthPoints health);
 
 private:
     HealthPoints _health;
@@ -25,13 +25,13 @@ private:
 // Anything that can do damage is defined as an Attacker.
 class Attacker {
 public:
-    AttackPower getAttackPower() const;
+    virtual AttackPower getAttackPower() const;
 
 protected:
-    Attacker(AttackPower attackPower);
+    explicit Attacker(AttackPower attackPower);
 
 private:
     const AttackPower _attackPower;
 };
 
-#endif  // HELPER_H
+#endif  // HELPER_H_

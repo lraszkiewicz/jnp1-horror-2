@@ -3,10 +3,10 @@
 #include "monster.h"
 
 Monster::Monster(HealthPoints health, AttackPower attackPower) :
-        Character(health), Attacker(attackPower) {};
+        Character(health), Attacker(attackPower) {}
 
 Zombie::Zombie(HealthPoints health, AttackPower attackPower) :
-        Monster(health, attackPower) {};
+        Monster(health, attackPower) {}
 
 std::shared_ptr<Zombie> createZombie(HealthPoints health,
                                      AttackPower attackPower) {
@@ -14,7 +14,7 @@ std::shared_ptr<Zombie> createZombie(HealthPoints health,
 }
 
 Vampire::Vampire(HealthPoints health, AttackPower attackPower) :
-        Monster(health, attackPower) {};
+        Monster(health, attackPower) {}
 
 std::shared_ptr<Vampire> createVampire(HealthPoints health,
                                        AttackPower attackPower) {
@@ -22,27 +22,27 @@ std::shared_ptr<Vampire> createVampire(HealthPoints health,
 }
 
 Mummy::Mummy(HealthPoints health, AttackPower attackPower) :
-        Monster(health, attackPower) {};
+        Monster(health, attackPower) {}
 
 std::shared_ptr<Mummy> createMummy(HealthPoints health,
                                    AttackPower attackPower) {
     return std::make_shared<Mummy>(Mummy(health, attackPower));
 }
 
-HealthPoints HPSum(std::vector<std::shared_ptr<Monster>> &monsters) {
+HealthPoints HPSum(const std::vector<std::shared_ptr<Monster>> &monsters) {
     HealthPoints result = 0;
     for (auto monster : monsters) {
-        result += (*monster).getHealth();
+        result += monster->getHealth();
     }
     return result;
 }
 
-AttackPower APSum(std::vector<std::shared_ptr<Monster>> &monsters) {
+AttackPower APSum(const std::vector<std::shared_ptr<Monster>> &monsters) {
     AttackPower result = 0;
     for (auto monster : monsters) {
         //TODO potencjalnie tymczasowy warunek, możliwe usuwanie potworów z listy
-        if ((*monster).getHealth() > 0) {
-            result += (*monster).getAttackPower();
+        if (monster->getHealth() > 0) {
+            result += monster->getAttackPower();
         }
     }
     return result;
@@ -50,17 +50,17 @@ AttackPower APSum(std::vector<std::shared_ptr<Monster>> &monsters) {
 
 GroupOfMonsters::GroupOfMonsters(
     std::vector<std::shared_ptr<Monster>> monsters) :
-        Monster(-1, -1), _monsters(monsters) {};
+        Monster(-1, -1), _monsters(monsters) {}
 
 GroupOfMonsters::GroupOfMonsters(
     std::initializer_list<std::shared_ptr<Monster>> monsters) :
-        Monster(-1, -1), _monsters(monsters) {};
+        Monster(-1, -1), _monsters(monsters) {}
 
-HealthPoints GroupOfMonsters::getHealth() {
+HealthPoints GroupOfMonsters::getHealth() const {
     return HPSum(_monsters);
 }
 
-AttackPower GroupOfMonsters::getAttackPower() {
+AttackPower GroupOfMonsters::getAttackPower() const {
     return APSum(_monsters);
 }
 

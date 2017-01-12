@@ -1,7 +1,7 @@
 // Łukasz Raszkiewicz, Maciej Gontar
 
-#ifndef CITIZEN_H
-#define CITIZEN_H
+#ifndef CITIZEN_H_
+#define CITIZEN_H_
 
 #include <memory>
 
@@ -9,7 +9,7 @@
 
 class Citizen : public /* virtual */ Character {
 public:
-    const Age getAge();
+    Age getAge() const;
 
 protected:
     Citizen(HealthPoints health, Age age);
@@ -32,7 +32,7 @@ public:
 
 std::shared_ptr<Teenager> createTeenager(HealthPoints health, Age age);
 
-class Sheriff : public Adult, public virtual Attacker {
+class Sheriff : public Adult, public /* virtual */ Attacker {
 public:
     Sheriff(HealthPoints health, Age age, AttackPower attackPower);
 };
@@ -41,4 +41,4 @@ std::shared_ptr<Sheriff> createSheriff(HealthPoints health,
                                        Age age,
                                        AttackPower attackPower);
 
-#endif  // CITIZEN_H
+#endif  // CITIZEN_H_
