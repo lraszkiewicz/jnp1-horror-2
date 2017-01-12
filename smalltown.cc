@@ -1,5 +1,6 @@
 // Łukasz Raszkiewicz, Maciej Gontar
 
+#include <iostream>
 #include "smalltown.h"
 
 
@@ -49,10 +50,26 @@ SmallTown::SmallTown(const std::shared_ptr<AttackStrategy> &attackStrategy,
 }
 
 void SmallTown::tick(const Time &timeStep) {
+    std::string message;
+    if (_aliveCitizens == 0 && _monster->getHealth() == 0)
+        message = draw;
+    else if (_aliveCitizens == 0)
+        message = monsterWon;
+    else if (_monster->getHealth() == 0)
+        message = citizensWon;
+    if (!message.empty()) {
+        std::cout << message << std::endl;
+        return;
+    }
+
     if (_attackStrategy->attackTime(_currentTime))
         for (auto &citizen : _citizens)
-            if (citizen->getHealth() > 0)
+            if (citizen->getHealth() > 0) {
                 citizen->beAttacked(_monster);
+                if (citizen->getHealth() == 0)
+                    --_aliveCitizens;
+            }
+
     _currentTime = (_currentTime + timeStep) % (_dayLength + 1);
 }
 

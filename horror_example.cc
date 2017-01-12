@@ -33,7 +33,6 @@ int main(int argc, const char * argv[]) {
     auto status = smallTown.getStatus();
     assert(status.getMonsterName() == "GroupOfMonsters");
     assert(status.getMonsterHealth() == 80);
-    printf("%d\n", status.getAliveCitizens());
     assert(status.getAliveCitizens() == 3);
 
     return 0;

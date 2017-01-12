@@ -8,10 +8,12 @@ set(SOURCE_FILES
         citizen.h
         helper.cc
         helper.h
-        horror_example.cc
         monster.cc
         monster.h
         smalltown.h
         smalltown.cc)
 
-add_executable(horror_2 ${SOURCE_FILES})
+add_executable(horror_example ${SOURCE_FILES} horror_example.cc)
+add_executable(attacking_test ${SOURCE_FILES} attacking_test.cc)
+add_executable(citizen_test ${SOURCE_FILES} citizen_test.cc)
+add_executable(groupofmonsters_test ${SOURCE_FILES} groupofmonsters_test.cc)
