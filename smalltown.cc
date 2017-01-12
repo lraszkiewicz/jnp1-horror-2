@@ -90,6 +90,9 @@ SmallTown::Builder &SmallTown::Builder::monster(
 
 SmallTown::Builder &SmallTown::Builder::citizen(
         const std::shared_ptr<Citizen> &citizen) {
+    for (auto &c: _citizens)
+        if (c == citizen)
+            return *this;
     _citizens.push_back(citizen);
     return *this;
 }

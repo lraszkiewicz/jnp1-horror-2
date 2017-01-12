@@ -46,12 +46,6 @@ std::shared_ptr<Mummy> createMummy(HealthPoints health,
                                    AttackPower attackPower);
 
 
-// HealthPoints HPSum(const std::vector<std::shared_ptr<Monster>> &monsters);
-
-// AttackPower APSum(const std::vector<std::shared_ptr<Monster>> &monsters);
-
-// Zmieniłem kod tak, że _health i _attackPower są cały czas aktualne.
-// Nie trzeba teraz nadpisywać metod getHealth() i getAttackPower().
 class GroupOfMonsters : public Monster {
 public:
     explicit GroupOfMonsters(std::vector<std::shared_ptr<Monster>> monsters);

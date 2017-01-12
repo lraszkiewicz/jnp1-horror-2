@@ -55,7 +55,6 @@ HealthPoints HPSum(const std::vector<std::shared_ptr<Monster>> &monsters) {
 AttackPower APSum(const std::vector<std::shared_ptr<Monster>> &monsters) {
     AttackPower result = 0;
     for (auto &monster : monsters)
-    // TODO potencjalnie tymczasowy warunek, możliwe usuwanie potworów z listy
         if (monster->getHealth() > 0)
             result += monster->getAttackPower();
     return result;
@@ -78,10 +77,8 @@ void GroupOfMonsters::takeDamage(AttackPower damage) {
         if (monster->getHealth() > 0) {
             Monster::takeDamage(std::min(monster->getHealth(), damage));
             monster->takeDamage(damage);
-            if (monster->getHealth() == 0) {
-                //TODO potencjalnie usuwanie potworów z listy
+            if (monster->getHealth() == 0)
                 Monster::reduceAttackPower(monster->getAttackPower());
-            }
         }
     }
 }
