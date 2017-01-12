@@ -1,5 +1,7 @@
 // Łukasz Raszkiewicz, Maciej Gontar
 
+#include <algorithm>
+
 #include "monster.h"
 
 Monster::Monster(const HealthPoints &health, const AttackPower &attackPower)

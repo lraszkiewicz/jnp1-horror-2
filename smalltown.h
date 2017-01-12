@@ -3,7 +3,10 @@
 #ifndef SMALLTOWN_H_
 #define SMALLTOWN_H_
 
+#include <memory>
 #include <stdexcept>
+#include <string>
+#include <vector>
 
 #include "helper.h"
 #include "citizen.h"
@@ -11,12 +14,12 @@
 
 class AttackStrategy {
 public:
+    // Returns true is the monster should attack at Time time.
     virtual bool attackTime(const Time &time) const = 0;
 };
 
 class DefaultStrategy : public AttackStrategy {
 public:
-    // Returns true is the monster should attack at Time time.
     bool attackTime(const Time &time) const;
 };
 

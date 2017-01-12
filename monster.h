@@ -4,11 +4,12 @@
 #define MONSTER_H_
 
 #include <memory>
+#include <string>
 #include <vector>
 
 #include "helper.h"
 
-class Monster : public /* virtual */ Character, public /* virtual */ Attacker {
+class Monster : public Character, public Attacker {
 public:
     virtual std::string name() const = 0;
 protected:

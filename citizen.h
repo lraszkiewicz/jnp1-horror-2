@@ -8,7 +8,7 @@
 #include "helper.h"
 #include "monster.h"
 
-class Citizen : public /* virtual */ Character {
+class Citizen : public Character {
 public:
     Age getAge() const;
     virtual void beAttacked(const std::shared_ptr<Monster> &monster);
@@ -37,7 +37,7 @@ public:
 std::shared_ptr<Teenager> createTeenager(HealthPoints health, Age age);
 
 
-class Sheriff : public Adult, public /* virtual */ Attacker {
+class Sheriff : public Adult, public Attacker {
 public:
     Sheriff(const HealthPoints &health,
             const Age &age,
