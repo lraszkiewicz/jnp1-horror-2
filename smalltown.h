@@ -52,9 +52,9 @@ private:
     std::shared_ptr<Monster> _monster;
     std::vector<std::shared_ptr<Citizen>> _citizens;
     size_t _aliveCitizens;
-    static constexpr std::string draw = "DRAW";
-    static constexpr std::string citizensWon = "CITIZENS WON";
-    static constexpr std::string monsterWon = "MONSTER WON";
+    static constexpr auto draw = "DRAW";
+    static constexpr auto citizensWon = "CITIZENS WON";
+    static constexpr auto monsterWon = "MONSTER WON";
 };
 
 class SmallTown::Builder {
