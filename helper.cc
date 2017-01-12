@@ -19,7 +19,7 @@ void Character::takeDamage(AttackPower damage) {
 }
 
 
-Attacker::Attacker(const AttackPower &attackPower)
+Attacker::Attacker(const AttackPower & attackPower)
         : _attackPower(attackPower) {
     if (attackPower <= 0)
         throw std::invalid_argument("AttackPower must be greater than 0.");

@@ -6,10 +6,12 @@
 #include <memory>
 
 #include "helper.h"
+#include "monster.h"
 
 class Citizen : public /* virtual */ Character {
 public:
     Age getAge() const;
+    virtual void beAttacked(const std::shared_ptr<Monster> &monster);
 
 protected:
     Citizen(const HealthPoints &health, const Age &age);
@@ -40,6 +42,7 @@ public:
     Sheriff(const HealthPoints &health,
             const Age &age,
             const AttackPower &attackPower);
+    void beAttacked(const std::shared_ptr<Monster> &monster);
 };
 
 std::shared_ptr<Sheriff> createSheriff(HealthPoints health,

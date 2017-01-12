@@ -9,6 +9,8 @@
 #include "helper.h"
 
 class Monster : public /* virtual */ Character, public /* virtual */ Attacker {
+public:
+    virtual std::string name() const = 0;
 protected:
     Monster(const HealthPoints &health, const AttackPower &attackPower);
 };
@@ -17,6 +19,7 @@ protected:
 class Zombie : public Monster {
 public:
     Zombie(const HealthPoints &health, const AttackPower &attackPower);
+    virtual std::string name() const;
 };
 
 std::shared_ptr<Zombie> createZombie(HealthPoints health,
@@ -26,6 +29,7 @@ std::shared_ptr<Zombie> createZombie(HealthPoints health,
 class Vampire : public Monster {
 public:
     Vampire(const HealthPoints &health, const AttackPower &attackPower);
+    virtual std::string name() const;
 };
 
 std::shared_ptr<Vampire> createVampire(HealthPoints health,
@@ -35,6 +39,7 @@ std::shared_ptr<Vampire> createVampire(HealthPoints health,
 class Mummy : public Monster {
 public:
     Mummy(const HealthPoints &health, const AttackPower &attackPower);
+    virtual std::string name() const;
 };
 
 std::shared_ptr<Mummy> createMummy(HealthPoints health,
@@ -53,6 +58,7 @@ public:
     explicit GroupOfMonsters(
             std::initializer_list<std::shared_ptr<Monster>> monsters);
     void takeDamage(AttackPower damage);
+    virtual std::string name() const;
 
 private:
     std::vector<std::shared_ptr<Monster>> _monsters;

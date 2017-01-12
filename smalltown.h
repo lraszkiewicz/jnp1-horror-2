@@ -1,64 +1,74 @@
 // Łukasz Raszkiewicz, Maciej Gontar
 
-#ifndef SMALLTOWN_H
-#define SMALLTOWN_H
+#ifndef SMALLTOWN_H_
+#define SMALLTOWN_H_
+
+#include <stdexcept>
 
 #include "helper.h"
 #include "citizen.h"
 #include "monster.h"
 
-using Time = int;
-
 class AttackStrategy {
 public:
-    virtual bool attackTime(Time time) const = 0;
+    virtual bool attackTime(const Time &time) const = 0;
 };
 
-class StandardAttack : public Strategy {
+class DefaultStrategy : public AttackStrategy {
 public:
-    bool attackTime(Time time);
+    // Returns true is the monster should attack at Time time.
+    bool attackTime(const Time &time) const;
 };
 
 class Status {
 public:
-    Status(std::string monsterType, HealthPoints monsterHealth, int aliveCitizens);
-    std::string getMonsterType const;
+    Status(std::string monsterType,
+           HealthPoints monsterHealth,
+           size_t aliveCitizens);
+    std::string getMonsterName() const;
     HealthPoints getMonsterHealth() const;
-    int getAliveCitizens() const;
+    size_t getAliveCitizens() const;
+
 private:
-    const std::string _monsterType;
+    const std::string _monsterName;
     HealthPoints _monsterHealth;
-    int _aliveCitizens;
+    size_t _aliveCitizens;
 };
 
 class SmallTown {
 public:
     class Builder;
-    SmallTown(Time t0, Time t1, ... );
-    void tick(Time timeStep);
+    void tick(const Time &timeStep);
     Status getStatus();
+
 private:
-    StandardAttack _attackChecker;
-    Time _currentTime;
-    Time _dayChange;
+    SmallTown(const std::shared_ptr<AttackStrategy> &attackStrategy,
+              const Time &t0,
+              const Time &t1,
+              const std::shared_ptr<Monster> &monster,
+              const std::vector<std::shared_ptr<Citizen>> &citizens);
+    std::shared_ptr<AttackStrategy> _attackStrategy;
+    Time _currentTime, _dayLength;
     std::shared_ptr<Monster> _monster;
     std::vector<std::shared_ptr<Citizen>> _citizens;
+    size_t _aliveCitizens;
 };
 
 class SmallTown::Builder {
 public:
     Builder();
-    Builder attackStrategy();
-    Builder startTime(const Time time);
-    Builder dayChange(const Time time);
-    Builder monster(std::shared_ptr<Monster> monster);
-    Builder citizen(std::shared_ptr<Citizen> citizen);
+    Builder &attackStrategy(const std::shared_ptr<AttackStrategy> &strategy);
+    Builder &startTime(const Time &time);
+    Builder &maxTime(const Time &time);
+    Builder &monster(const std::shared_ptr<Monster> &monster);
+    Builder &citizen(const std::shared_ptr<Citizen> &citizen);
     SmallTown build();
+
 private:
-    AttackStrategy _attackStrategy;
-    Time _t0;
-    Time _t1;
+    std::shared_ptr<AttackStrategy> _attackStrategy;
+    Time _t0, _t1;
     std::shared_ptr<Monster> _monster;
     std::vector<std::shared_ptr<Citizen>> _citizens;
 };
-#endif  // SMALLTOWN_H
+
+#endif  // SMALLTOWN_H_

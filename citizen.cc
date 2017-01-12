@@ -11,6 +11,10 @@ Age Citizen::getAge() const {
     return _age;
 }
 
+void Citizen::beAttacked(const std::shared_ptr<Monster> &monster) {
+    takeDamage(monster->getAttackPower());
+}
+
 
 Adult::Adult(const HealthPoints &health, const Age &age)
         : Citizen(health, age) {
@@ -38,6 +42,11 @@ Sheriff::Sheriff(const HealthPoints &health,
                  const Age &age,
                  const AttackPower &attackPower)
         : Adult(health, age), Attacker(attackPower) {}
+
+void Sheriff::beAttacked(const std::shared_ptr<Monster> &monster) {
+    Citizen::beAttacked(monster);
+    monster->takeDamage(getAttackPower());
+}
 
 std::shared_ptr<Sheriff> createSheriff(HealthPoints health,
                                        Age age,

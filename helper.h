@@ -8,7 +8,7 @@
 using HealthPoints = int;
 using Age = int;
 using AttackPower = int;
-
+using Time = int;
 
 // Anything that has health is defined as a Character.
 class Character {
@@ -22,7 +22,6 @@ protected:
 private:
     HealthPoints _health;
 };
-
 
 // Anything that can do damage is defined as an Attacker.
 class Attacker {

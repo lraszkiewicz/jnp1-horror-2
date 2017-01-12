@@ -9,6 +9,10 @@ Monster::Monster(const HealthPoints &health, const AttackPower &attackPower)
 Zombie::Zombie(const HealthPoints &health, const AttackPower &attackPower)
         : Monster(health, attackPower) {}
 
+std::string Zombie::name() const {
+    return "Zombie";
+}
+
 std::shared_ptr<Zombie> createZombie(HealthPoints health,
                                      AttackPower attackPower) {
     return std::make_shared<Zombie>(Zombie(health, attackPower));
@@ -18,6 +22,10 @@ std::shared_ptr<Zombie> createZombie(HealthPoints health,
 Vampire::Vampire(const HealthPoints &health, const AttackPower &attackPower)
         : Monster(health, attackPower) {}
 
+std::string Vampire::name() const {
+    return "Vampire";
+}
+
 std::shared_ptr<Vampire> createVampire(HealthPoints health,
                                        AttackPower attackPower) {
     return std::make_shared<Vampire>(Vampire(health, attackPower));
@@ -26,6 +34,10 @@ std::shared_ptr<Vampire> createVampire(HealthPoints health,
 
 Mummy::Mummy(const HealthPoints &health, const AttackPower &attackPower)
         : Monster(health, attackPower) {}
+
+std::string Mummy::name() const {
+    return "Mummy";
+}
 
 std::shared_ptr<Mummy> createMummy(HealthPoints health,
                                    AttackPower attackPower) {
@@ -56,6 +68,10 @@ GroupOfMonsters::GroupOfMonsters(
 GroupOfMonsters::GroupOfMonsters(
     std::initializer_list<std::shared_ptr<Monster>> monsters)
         : _monsters(monsters), Monster(HPSum(monsters), APSum(monsters)) {}
+
+std::string GroupOfMonsters::name() const {
+    return "GroupOfMonsters";
+}
 
 void GroupOfMonsters::takeDamage(AttackPower damage) {
     for (auto &monster : _monsters) {
