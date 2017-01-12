@@ -42,6 +42,7 @@ SmallTown::SmallTown(const std::shared_ptr<AttackStrategy> &attackStrategy,
         throw std::logic_error("Monster not passed to SmallTown.");
     if (citizens.size() == 0)
         throw std::logic_error("No citizens passed to SmallTown.");
+    _aliveCitizens = 0;
     for (auto &citizen : _citizens)
         if (citizen->getHealth() > 0)
             ++_aliveCitizens;
