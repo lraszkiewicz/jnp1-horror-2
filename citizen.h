@@ -12,29 +12,34 @@ public:
     Age getAge() const;
 
 protected:
-    Citizen(HealthPoints health, Age age);
+    Citizen(const HealthPoints &health, const Age &age);
 
 private:
     const Age _age;
 };
 
+
 class Adult : public Citizen {
 public:
-    Adult(HealthPoints health, Age age);
+    Adult(const HealthPoints &health, const Age &age);
 };
 
 std::shared_ptr<Adult> createAdult(HealthPoints health, Age age);
 
+
 class Teenager : public Citizen {
 public:
-    Teenager(HealthPoints health, Age age);
+    Teenager(const HealthPoints &health, const Age &age);
 };
 
 std::shared_ptr<Teenager> createTeenager(HealthPoints health, Age age);
 
+
 class Sheriff : public Adult, public /* virtual */ Attacker {
 public:
-    Sheriff(HealthPoints health, Age age, AttackPower attackPower);
+    Sheriff(const HealthPoints &health,
+            const Age &age,
+            const AttackPower &attackPower);
 };
 
 std::shared_ptr<Sheriff> createSheriff(HealthPoints health,

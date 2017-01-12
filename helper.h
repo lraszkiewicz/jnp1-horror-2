@@ -9,29 +9,32 @@ using HealthPoints = int;
 using Age = int;
 using AttackPower = int;
 
+
 // Anything that has health is defined as a Character.
 class Character {
 public:
-    virtual HealthPoints getHealth() const;
+    HealthPoints getHealth() const;
     virtual void takeDamage(AttackPower damage);
 
 protected:
-    explicit Character(HealthPoints health);
+    explicit Character(const HealthPoints &health);
 
 private:
     HealthPoints _health;
 };
 
+
 // Anything that can do damage is defined as an Attacker.
 class Attacker {
 public:
-    virtual AttackPower getAttackPower() const;
+    AttackPower getAttackPower() const;
 
 protected:
-    explicit Attacker(AttackPower attackPower);
+    explicit Attacker(const AttackPower &attackPower);
+    void reduceAttackPower(const AttackPower &reduction);
 
 private:
-    const AttackPower _attackPower;
+    AttackPower _attackPower;
 };
 
 #endif  // HELPER_H_

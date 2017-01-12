@@ -18,6 +18,12 @@ int main(int argc, const char * argv[]) {
         createZombie(20, 1),
         createVampire(30, 1)
     });
+    assert(groupOfMonsters->getHealth() == 140);
+    assert(groupOfMonsters->getAttackPower() == 3);
+    groupOfMonsters->takeDamage(30);
+    assert(groupOfMonsters->getHealth() == 60);
+    assert(groupOfMonsters->getAttackPower() == 1);
+//    assert(groupOfMonsters->getAttackPower() == 3);
 //    auto smallTown = SmallTown::Builder()
 //        .monster(groupOfMonsters)
 //        .startTime(3)

@@ -10,6 +10,7 @@ set(SOURCE_FILES
         helper.h
         horror_example.cc
         monster.cc
-        monster.h)
+        monster.h
+        smalltown.h)
 
 add_executable(horror_2 ${SOURCE_FILES})

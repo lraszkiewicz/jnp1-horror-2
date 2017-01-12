@@ -10,47 +10,48 @@
 
 class Monster : public /* virtual */ Character, public /* virtual */ Attacker {
 protected:
-    Monster(HealthPoints health, AttackPower attackPower);
+    Monster(const HealthPoints &health, const AttackPower &attackPower);
 };
+
 
 class Zombie : public Monster {
 public:
-    Zombie(HealthPoints health, AttackPower attackPower);
+    Zombie(const HealthPoints &health, const AttackPower &attackPower);
 };
 
 std::shared_ptr<Zombie> createZombie(HealthPoints health,
                                      AttackPower attackPower);
 
+
 class Vampire : public Monster {
 public:
-    Vampire(HealthPoints health, AttackPower attackPower);
+    Vampire(const HealthPoints &health, const AttackPower &attackPower);
 };
 
 std::shared_ptr<Vampire> createVampire(HealthPoints health,
                                        AttackPower attackPower);
 
+
 class Mummy : public Monster {
 public:
-    Mummy(HealthPoints health, AttackPower attackPower);
+    Mummy(const HealthPoints &health, const AttackPower &attackPower);
 };
 
 std::shared_ptr<Mummy> createMummy(HealthPoints health,
                                    AttackPower attackPower);
 
-HealthPoints HPSum(const std::vector<std::shared_ptr<Monster>> &monsters);
 
-AttackPower APSum(const std::vector<std::shared_ptr<Monster>> &monsters);
+// HealthPoints HPSum(const std::vector<std::shared_ptr<Monster>> &monsters);
 
-// Obecnie GroupOfMonsters posiada HP i AP, ale nie mają one żadnego znaczenia
-// Aktualizacja stanu życia odbywa się indywidualnie na poziomie _monsters
-// Sądzę, że aktualizowanie tych wartości również na poziomie grupy jest zbędne
+// AttackPower APSum(const std::vector<std::shared_ptr<Monster>> &monsters);
+
+// Zmieniłem kod tak, że _health i _attackPower są cały czas aktualne.
+// Nie trzeba teraz nadpisywać metod getHealth() i getAttackPower().
 class GroupOfMonsters : public Monster {
 public:
     explicit GroupOfMonsters(std::vector<std::shared_ptr<Monster>> monsters);
     explicit GroupOfMonsters(
             std::initializer_list<std::shared_ptr<Monster>> monsters);
-    HealthPoints getHealth() const;
-    AttackPower getAttackPower() const;
     void takeDamage(AttackPower damage);
 
 private:
@@ -58,9 +59,9 @@ private:
 };
 
 std::shared_ptr<GroupOfMonsters> createGroupOfMonsters(
-        std::vector<std::shared_ptr<Monster>> monsters);
+        const std::vector<std::shared_ptr<Monster>> &monsters);
 
 std::shared_ptr<GroupOfMonsters> createGroupOfMonsters(
-        std::initializer_list<std::shared_ptr<Monster>> monsters);
+        const std::initializer_list<std::shared_ptr<Monster>> &monsters);
 
 #endif  // MONSTER_H_
