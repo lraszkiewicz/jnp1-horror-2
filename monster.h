@@ -37,10 +37,6 @@ public:
 std::shared_ptr<Mummy> createMummy(HealthPoints health,
                                    AttackPower attackPower);
 
-HealthPoints HPSum(const std::vector<std::shared_ptr<Monster>> &monsters);
-
-AttackPower APSum(const std::vector<std::shared_ptr<Monster>> &monsters);
-
 // Obecnie GroupOfMonsters posiada HP i AP, ale nie mają one żadnego znaczenia
 // Aktualizacja stanu życia odbywa się indywidualnie na poziomie _monsters
 // Sądzę, że aktualizowanie tych wartości również na poziomie grupy jest zbędne
@@ -58,9 +54,9 @@ private:
 };
 
 std::shared_ptr<GroupOfMonsters> createGroupOfMonsters(
-        std::vector<std::shared_ptr<Monster>> monsters);
+        const std::vector<std::shared_ptr<Monster>> &monsters);
 
 std::shared_ptr<GroupOfMonsters> createGroupOfMonsters(
-        std::initializer_list<std::shared_ptr<Monster>> monsters);
+        const std::initializer_list<std::shared_ptr<Monster>> &monsters);
 
 #endif  // MONSTER_H_
